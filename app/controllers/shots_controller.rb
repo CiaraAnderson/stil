@@ -14,7 +14,13 @@ class ShotsController < ApplicationController
       render plain: 'Not Found :(', status: :not_found
     end
   end
-
+  
+  def edit
+    @shot = Gram.find_by_id(params[:id])
+    if @shot.blank?
+      render plain: 'Not Found :(', status: :not_found
+    end
+  end
   def create
     @shot = current_user.shots.create(shot_params)
     if @shot.valid?
